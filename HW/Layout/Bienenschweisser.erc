@@ -1,0 +1,13 @@
+EAGLE Version 4.09r2 Copyright (c) 1988-2002 CadSoft
+
+Electrical Rule Check for C:/Programme/EAGLE/projects/Bienenschweisser/Bienenschweisser/Bienenschweisser.sch at 03.06.2006 21:53:43 
+
+WARNING: Sheet 1/1: POWER Pin IC2 VCC connected to +5V
+WARNING: Sheet 1/1: POWER Pin IC2 AVCC connected to +5V
+WARNING: Sheet 1/1: POWER Pin IC2 AREF connected to +5V
+WARNING: Sheet 1/1: POWER Pin IC2 AGND connected to GND
+
+Board and schematic are consistent
+
+    0 errors
+    4 warnings

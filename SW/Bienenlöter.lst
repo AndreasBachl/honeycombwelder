@@ -1,0 +1,181 @@
+   1               		.file	"Bienenl\366ter.c"
+   2               		.arch at90s4433
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	__vector_4
+  20               	__vector_4:
+  21               	.LFB3:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24 0000 1F92      		push __zero_reg__
+  25 0002 0F92      		push __tmp_reg__
+  26 0004 0FB6      		in __tmp_reg__,__SREG__
+  27 0006 0F92      		push __tmp_reg__
+  28 0008 1124      		clr __zero_reg__
+  29 000a 2F93      		push r18
+  30 000c 3F93      		push r19
+  31 000e 8F93      		push r24
+  32 0010 9F93      		push r25
+  33               	/* prologue end (size=9) */
+  34               	.LM2:
+  35 0012 8091 0000 		lds r24,direction
+  36 0016 9927      		clr r25
+  37 0018 0097      		sbiw r24,0
+  38 001a 19F0      		breq .L3
+  39               	.LM3:
+  40 001c 0197      		sbiw r24,1
+  41 001e A1F0      		breq .L4
+  42 0020 25C0      		rjmp .L2
+  43               	.L3:
+  44               	.LM4:
+  45 0022 21E0      		ldi r18,lo8(1)
+  46 0024 2093 0000 		sts direction,r18
+  47               	.LM5:
+  48 0028 8091 0000 		lds r24,ADC_Val
+  49 002c 9091 0000 		lds r25,(ADC_Val)+1
+  50 0030 022E      		mov r0,r18
+  51 0032 02C0      		rjmp 2f
+  52 0034 9695      	1:	lsr r25
+  53 0036 8795      		ror r24
+  54 0038 0A94      	2:	dec r0
+  55 003a E2F7      		brpl 1b
+  56 003c 9093 0000 		sts (pwm)+1,r25
+  57 0040 8093 0000 		sts pwm,r24
+  58               	.LM6:
+  59 0044 22BB      		out 50-0x20,r18
+  60               	.LM7:
+  61 0046 12C0      		rjmp .L2
+  62               	.L4:
+  63               	.LM8:
+  64 0048 1092 0000 		sts direction,__zero_reg__
+  65               	.LM9:
+  66 004c 2091 0000 		lds r18,ADC_Val
+  67 0050 3091 0000 		lds r19,(ADC_Val)+1
+  68 0054 80E0      		ldi r24,lo8(1024)
+  69 0056 94E0      		ldi r25,hi8(1024)
+  70 0058 821B      		sub r24,r18
+  71 005a 930B      		sbc r25,r19
+  72 005c 9695      		lsr r25
+  73 005e 8795      		ror r24
+  74 0060 9093 0000 		sts (pwm)+1,r25
+  75 0064 8093 0000 		sts pwm,r24
+  76               	.LM10:
+  77 0068 12BA      		out 50-0x20,__zero_reg__
+  78               	.LM11:
+  79               	/* #APP */
+  80 006a A895      		wdr
+  81               	/* #NOAPP */
+  82               	.L2:
+  83               	.LM12:
+  84 006c 8091 0000 		lds r24,pwm
+  85 0070 9091 0000 		lds r25,(pwm)+1
+  86 0074 9BBD      		out (74)+1-0x20,r25
+  87 0076 8ABD      		out 74-0x20,r24
+  88               	/* epilogue: frame size=0 */
+  89 0078 9F91      		pop r25
+  90 007a 8F91      		pop r24
+  91 007c 3F91      		pop r19
+  92 007e 2F91      		pop r18
+  93 0080 0F90      		pop __tmp_reg__
+  94 0082 0FBE      		out __SREG__,__tmp_reg__
+  95 0084 0F90      		pop __tmp_reg__
+  96 0086 1F90      		pop __zero_reg__
+  97 0088 1895      		reti
+  98               	/* epilogue end (size=9) */
+  99               	/* function __vector_4 size 71 (53) */
+ 100               	.LFE3:
+ 102               	.global	ioinit
+ 104               	ioinit:
+ 105               	.LFB4:
+ 106               	.LM13:
+ 107               	/* prologue: frame size=0 */
+ 108               	/* prologue end (size=0) */
+ 109               	.LM14:
+ 110 008a 90E4      		ldi r25,lo8(64)
+ 111 008c 9FBD      		out 79-0x20,r25
+ 112               	.LM15:
+ 113 008e 8AE0      		ldi r24,lo8(10)
+ 114 0090 8EBD      		out 78-0x20,r24
+ 115               	.LM16:
+ 116 0092 1BBC      		out (74)+1-0x20,__zero_reg__
+ 117 0094 1ABC      		out 74-0x20,__zero_reg__
+ 118               	.LM17:
+ 119 0096 82E0      		ldi r24,lo8(2)
+ 120 0098 87BB      		out 55-0x20,r24
+ 121               	.LBB2:
+ 122               	.LBB3:
+ 123               	.LM18:
+ 124 009a 99BF      		out 89-0x20,r25
+ 125               	.LBE3:
+ 126               	.LBE2:
+ 127               	.LM19:
+ 128 009c 81E0      		ldi r24,lo8(1)
+ 129 009e 82BB      		out 50-0x20,r24
+ 130               	.LM20:
+ 131 00a0 83E0      		ldi r24,lo8(3)
+ 132 00a2 81BB      		out 49-0x20,r24
+ 133               	.LM21:
+ 134               	/* #APP */
+ 135 00a4 7894      		sei
+ 136               	/* #NOAPP */
+ 137               	/* epilogue: frame size=0 */
+ 138 00a6 0895      		ret
+ 139               	/* epilogue end (size=1) */
+ 140               	/* function ioinit size 16 (15) */
+ 141               	.LFE4:
+ 143               	.global	main
+ 145               	main:
+ 146               	.LFB5:
+ 147               	.LM22:
+ 148               	/* prologue: frame size=0 */
+ 149 00a8 C0E0      		ldi r28,lo8(__stack - 0)
+ 150 00aa D0E0      		ldi r29,hi8(__stack - 0)
+ 151 00ac DEBF      		out __SP_H__,r29
+ 152 00ae CDBF      		out __SP_L__,r28
+ 153               	/* prologue end (size=4) */
+ 154               	.LM23:
+ 155 00b0 84EF      		ldi r24,lo8(500)
+ 156 00b2 91E0      		ldi r25,hi8(500)
+ 157 00b4 9093 0000 		sts (ADC_Val)+1,r25
+ 158 00b8 8093 0000 		sts ADC_Val,r24
+ 159               	.LM24:
+ 160 00bc E6DF      		rcall ioinit
+ 161               	.LM25:
+ 162 00be 8FE0      		ldi r24,lo8(15)
+ 163 00c0 81BD      		out 65-0x20,r24
+ 164               	.L8:
+ 165               	.LM26:
+ 166 00c2 FFCF      		rjmp .L8
+ 167               	/* epilogue: frame size=0 */
+ 168               	/* epilogue: noreturn */
+ 169               	/* epilogue end (size=0) */
+ 170               	/* function main size 14 (10) */
+ 171               	.LFE5:
+ 173               		.comm pwm,2,1
+ 174               		.comm ADC_Val,2,1
+ 175               		.comm direction,1,1
+ 176               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 Bienenlöter.c
+                            *ABS*:0000003f __SREG__
+                            *ABS*:0000003e __SP_H__
+                            *ABS*:0000003d __SP_L__
+                            *ABS*:00000000 __tmp_reg__
+                            *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\ANDREA~1\LOKALE~1\Temp/ccstaaaa.s:20     .text:00000000 __vector_4
+                            *COM*:00000001 direction
+                            *COM*:00000002 ADC_Val
+                            *COM*:00000002 pwm
+C:\DOKUME~1\ANDREA~1\LOKALE~1\Temp/ccstaaaa.s:104    .text:0000008a ioinit
+C:\DOKUME~1\ANDREA~1\LOKALE~1\Temp/ccstaaaa.s:145    .text:000000a8 main
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__stack
